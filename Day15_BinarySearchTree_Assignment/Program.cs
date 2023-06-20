@@ -25,14 +25,10 @@ namespace Day15_BinarySearchTree_Assignment
         public class BinarySearchTree<T> where T : IComparable<T>
         {
             private MyBinaryNode<T> root;
-            private int size;
-
-            public int Size => size;
 
             public void Add(T key)
             {
                 root = AddNode(root, key);
-                size++;
             }
 
             private MyBinaryNode<T> AddNode(MyBinaryNode<T> currentNode, T key)
@@ -56,6 +52,34 @@ namespace Day15_BinarySearchTree_Assignment
                 return currentNode;
             }
 
+            public bool Search(T key)
+            {
+                return SearchNode(root, key);
+            }
+
+            private bool SearchNode(MyBinaryNode<T> currentNode, T key)
+            {
+                if (currentNode == null)
+                {
+                    return false;
+                }
+
+                int compareResult = key.CompareTo(currentNode.Key);
+
+                if (compareResult == 0)
+                {
+                    return true;
+                }
+                else if (compareResult < 0)
+                {
+                    return SearchNode(currentNode.Left, key);
+                }
+                else
+                {
+                    return SearchNode(currentNode.Right, key);
+                }
+            }
+
             public void PrintInOrderTraversal()
             {
                 PrintInOrder(root);
@@ -71,6 +95,7 @@ namespace Day15_BinarySearchTree_Assignment
                 }
             }
         }
+
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Binary Search Tree Assignment");
@@ -93,7 +118,7 @@ namespace Day15_BinarySearchTree_Assignment
 
             bst.PrintInOrderTraversal();
 
-            Console.WriteLine("\nSize of the binary search tree: " + bst.Size);
+            Console.WriteLine("\nSearching for 63: " + bst.Search(63));
 
             Console.ReadLine();
         }
