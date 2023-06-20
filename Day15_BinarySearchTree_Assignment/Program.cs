@@ -25,10 +25,14 @@ namespace Day15_BinarySearchTree_Assignment
         public class BinarySearchTree<T> where T : IComparable<T>
         {
             private MyBinaryNode<T> root;
+            private int size;
+
+            public int Size => size;
 
             public void Add(T key)
             {
                 root = AddNode(root, key);
+                size++;
             }
 
             private MyBinaryNode<T> AddNode(MyBinaryNode<T> currentNode, T key)
@@ -76,8 +80,20 @@ namespace Day15_BinarySearchTree_Assignment
             bst.Add(56);
             bst.Add(30);
             bst.Add(70);
+            bst.Add(22);
+            bst.Add(40);
+            bst.Add(60);
+            bst.Add(95);
+            bst.Add(11);
+            bst.Add(65);
+            bst.Add(3);
+            bst.Add(16);
+            bst.Add(63);
+            bst.Add(67);
 
             bst.PrintInOrderTraversal();
+
+            Console.WriteLine("\nSize of the binary search tree: " + bst.Size);
 
             Console.ReadLine();
         }
